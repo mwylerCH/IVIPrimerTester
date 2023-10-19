@@ -13,13 +13,22 @@ use POSIX;
 # Wyler M. 13.10.2023
 
 # my $TEMPfolder = $ARGV[0];
-# my $VIRUS = $ARGV[1];
-my $VIRUS = "AHSV_TaqMan_NS2";
-my $TEMPfolder = "/home/mwyler/tempDevPrimer";
+my $VIRUS = $ARGV[0];
+# my $VIRUS = "AHSV_TaqMan_NS2";
+# my $TEMPfolder = "/home/mwyler/tempDevPrimer";
 
-#$VIRUS = 'ciaone';;
+# $VIRUS = 'ciaone';
 
 my $MACHOPATH = dirname $0;
+my $dir = getcwd . "/";
+my $TEMPfolder = tempdir( DIR => $dir, CLEANUP => 1 );
+
+# check if a parameter is present
+if( $#ARGV == -1 ){
+	print "You missed a primer\n";
+	exit;
+}
+
 
 ## PRIMER Prep ------------------------------------
 
@@ -31,6 +40,8 @@ if ($RUNprimer ne "APPOSTO"){
 	print "$RUNprimer\n";
 	exit;
 }
+
+print "Check primer: $VIRUS\n";
 
 ## NCBI mining ------------------------------------
 
