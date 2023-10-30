@@ -12,3 +12,10 @@ ls PrimerMacho/miners/* | while read line; do
   perl PrimerMacho/MASTER.pl $PRIMER > primerTestOUT/resultScreening_$PRIMER.txt
 done
 ```
+
+
+# quick overview of results
+
+```
+fgrep Forward * | sed 's/Forward=//g' | sed 's/Reverse=//g' | awk '{if($2 > 2) print $0}'
+```
