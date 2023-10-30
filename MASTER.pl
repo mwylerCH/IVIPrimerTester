@@ -86,7 +86,7 @@ my $MERGEDfolder =  $TEMPfolder . "/mergedCandidates";
 system "mkdir -p $MERGEDfolder";
 
 # use EMBOSS merger to fill up NCBI sequences
-system "ls $TEMPfolder/singleRawFasta/*.fa | parallel 'merger -asequence {} -bsequence ${TEMPfolder}/REFERENCE.fa -outseq $MERGEDfolder/{/} -outfile $MERGEDfolder/{/.}.txt'  >/dev/null 2>&1";
+system "ls $TEMPfolder/singleRawFasta/*.fa | parallel 'megamerger -wordsize 2 -prefer=T -asequence {} -bsequence ${TEMPfolder}/REFERENCE.fa -outseq $MERGEDfolder/{/} -outfile $MERGEDfolder/{/.}.txt'  >/dev/null 2>&1";
 
 
 ## Primer Search ---------------------------------
