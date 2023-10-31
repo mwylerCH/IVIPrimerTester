@@ -40,10 +40,6 @@ while(<IN>){
 	if ($_ =~ m/Sequence:/){
 		$TARGETseq = $_ ;
 		$TARGETseq =~ s/\sSequence: //;
-		# test if not already screaned
-#		if ( grep( /^$TARGETseq$/, @CONTROLERsequence ) ) {
-			push(@CONTROLERsequence, $TARGETseq);
-#		}
 	# for and rev mismatch
 	} elsif ($_ =~ m/hits forward strand/) {
 		$FORWARDmismatch = $_;
@@ -57,7 +53,9 @@ while(<IN>){
 		$AMPLIMERlength =~ s/\sbp//;
 
 		# Print out once reached last row of block (only if problematic)
-		if ($FORWARDmismatch > 1 || $REVERSEmismatch > 1){
+		if ($FORWARDmismatch > 2 || $REVERSEmismatch > 2){
+			# make an array to see if it's problematic
+			push(@CONTROLERsequence, $TARGETseq);
 			print "$TARGETseq\tForward=$FORWARDmismatch\tReverse=$REVERSEmismatch\tAmplemerLen=$AMPLIMERlength\n"; 
 		}
 	}
@@ -68,6 +66,6 @@ close (IN);
 # print warning if multiple hits
 foreach my $string (@CONTROLERsequence) {
 	next unless $seen{$string}++;
-	print "'$string' is duplicated.\n";
+	print "'$string' has multiple amplifications.\n";
 
 }
