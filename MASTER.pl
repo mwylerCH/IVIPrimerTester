@@ -76,7 +76,7 @@ system "Rscript $AAL/$MINERlist[0] $TEMPfolder >/dev/null 2>&1";
 
 # filter by length and make single seq fastas into a new folder
 
-system "perl $MACHOPATH/subFastaFilter.pl $TEMPfolder $MACHOPATH/RefFasta/${VIRUS}.fa.gz";
+system "perl $MACHOPATH/subFastaFilter.pl $TEMPfolder $MACHOPATH/RefFasta/${VIRUS}.fa.gz $MACHOPATH/RefFiles/BlackList.txt";
 
 # print header
 my $NUMERO = `ls $TEMPfolder/singleRawFasta/*.fa | wc -l`;
