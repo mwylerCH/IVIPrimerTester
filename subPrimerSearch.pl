@@ -21,7 +21,6 @@ my $PRMSEARCH = $ARGV[0];
 
 
 ## Read Description of sequences first
-$PRMSEARCH = 'COPIONE/primerSearch.out';
 my $FASTA = $PRMSEARCH;
 $FASTA =~ s/primerSearch.out/fastaFromNCBI.fa/;
 
