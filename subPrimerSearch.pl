@@ -20,7 +20,31 @@ my $PRMSEARCH = $ARGV[0];
 #my $dir = getcwd . "/";
 
 
-### Read File -------------------------------
+## Read Description of sequences first
+$PRMSEARCH = 'COPIONE/primerSearch.out';
+my $FASTA = $PRMSEARCH;
+$FASTA =~ s/primerSearch.out/fastaFromNCBI.fa/;
+
+my %FASTAdescriptions;
+open(IN, $FASTA) or die "can't open $FASTA";
+while (my $line = <IN>){
+	chomp $line;
+	$line =~ s/^\s*$//;
+	if ($line =~ m/^>(.*)$/){
+		# get only id
+		my $ID = $line;
+		$ID =~ s/(>\S*)\s.*/$1/; 
+		$ID =~ s/>//;
+		# get only description
+		my $description = $line;
+		$description =~ s/>\S*(\s.*)/$1/; 
+		# add to hash
+		$FASTAdescriptions{"$ID"} = $description;
+	}
+}
+close (IN);
+
+### Read primersearch File -------------------------------
 
 # keep array as control to see if multiple marker hit the same sequence
 my @CONTROLERsequence;
@@ -54,9 +78,13 @@ while(<IN>){
 
 		# Print out once reached last row of block (only if problematic)
 		if ($FORWARDmismatch > 2 || $REVERSEmismatch > 2){
+			$TARGETseq =~ s/\s+//;
 			# make an array to see if it's problematic
 			push(@CONTROLERsequence, $TARGETseq);
-			print "$TARGETseq\tForward=$FORWARDmismatch\tReverse=$REVERSEmismatch\tAmplemerLen=$AMPLIMERlength\n"; 
+			# get description from fasta
+			my $DESC = $FASTAdescriptions{"$TARGETseq"};
+			# print out
+			print "$TARGETseq\tForward=$FORWARDmismatch\tReverse=$REVERSEmismatch\tAmplemerLen=$AMPLIMERlength\t$DESC\n"; 
 		}
 	}
 }
