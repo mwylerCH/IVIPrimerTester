@@ -41,7 +41,6 @@ if ($RUNprimer ne "APPOSTO"){
 	exit;
 }
 
-print "Check primer: $VIRUS\n";
 
 ## NCBI mining ------------------------------------
 
@@ -79,6 +78,11 @@ system "Rscript $AAL/$MINERlist[0] $TEMPfolder >/dev/null 2>&1";
 
 system "perl $MACHOPATH/subFastaFilter.pl $TEMPfolder $MACHOPATH/RefFasta/${VIRUS}.fa.gz";
 
+# print header
+my $NUMERO = `ls $TEMPfolder/singleRawFasta/*.fa | wc -l`;
+$NUMERO =~ s/\n//;;
+print "Check primer: $VIRUS ($NUMERO seqs from NCBI)\n";
+
 
 ## Merge with Reference ---------------------------------
 
@@ -86,8 +90,7 @@ my $MERGEDfolder =  $TEMPfolder . "/mergedCandidates";
 system "mkdir -p $MERGEDfolder";
 
 # use EMBOSS merger to fill up NCBI sequences
-system "ls $TEMPfolder/singleRawFasta/*.fa | parallel 'megamerger -wordsize 2 -prefer=T -asequence {} -bsequence ${TEMPfolder}/REFERENCE.fa -outseq $MERGEDfolder/{/} -outfile $MERGEDfolder/{/.}.txt'  >/dev/null 2>&1";
-
+system "ls $TEMPfolder/singleRawFasta/*.fa | parallel 'megamerger -wordsize 20 -prefer=T -asequence {} -bsequence ${TEMPfolder}/REFERENCE.fa -outseq $MERGEDfolder/{/} -outfile $MERGEDfolder/{/.}.txt'  >/dev/null 2>&1";
 
 ## Primer Search ---------------------------------
 
@@ -98,3 +101,6 @@ system "primersearch -infile $TEMPfolder/primerToTest.txt -seqall $TEMPfolder/al
 
 # parse output
 system "perl $MACHOPATH/subPrimerSearch.pl $TEMPfolder/primerSearch.out";
+
+
+system "cp -r $TEMPfolder/ COPIONE";
