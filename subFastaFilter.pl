@@ -36,7 +36,7 @@ while (my $line = <IN>){
 }
 close (IN);
 
-# get length of the sequence (and print fata for later)
+# get length of the sequence (and print fasta for later)
 
 my $REFLEN;
 my $REFNAME = $TEMPfolder . "/REFERENCE.fa";
