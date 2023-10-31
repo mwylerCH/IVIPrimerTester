@@ -8,7 +8,7 @@ use Cwd;
 use POSIX;
 
 # script takes a reference sequence and checks names and size of NCBI mined
-# Wyler M. 13.10.2023
+# Wyler M. 31.10.2023
 
 #my $TEMPfolder = "/home/mwyler/tempDevPrimer";
 #my $NCBIFASTA = "/home/mwyler/tempDevPrimer/fastaFromNCBI.fa";
@@ -17,7 +17,21 @@ use POSIX;
 my $TEMPfolder = $ARGV[0];
 my $NCBIFASTA = $TEMPfolder . "/fastaFromNCBI.fa";
 my $REFFASTA = $ARGV[1];
+my $BLACKLIST = $ARGV[2];
 
+
+## Read Black listed sequence ----------------------------------------
+
+my @BLACK;
+open(IN, $BLACKLIST ) or die "can't open $BLACKLIST";
+while(<IN>){
+	chomp;
+	$_ =~ s/^\s*$//;
+	if ($_ =~ m/^(\S*)$/){
+		push(@BLACK, $_);
+	}
+}
+close(IN);
 
 ## Read in Reference ----------------------------------------
 
@@ -36,7 +50,7 @@ while (my $line = <IN>){
 }
 close (IN);
 
-# get length of the sequence (and print fasta for later)
+# get length of the sequence (and print fata for later)
 
 my $REFLEN;
 my $REFNAME = $TEMPfolder . "/REFERENCE.fa";
@@ -63,6 +77,7 @@ while (my $line = <IN>){
         $line =~ s/^\s*$//;
     if ($line =~ m/^>(.*)$/){
         $NCBIheader = $line;
+	$NCBIheader =~ s/\s$//;
     } else {
         $NCBIseqs{"$NCBIheader"} .= $line;
     }
@@ -70,7 +85,22 @@ while (my $line = <IN>){
 close (IN);
 
 
-## Read in from NCBI ----------------------------------------
+## Delete Black listed sequences ----------------------------------------
+
+# full name of sequence
+my @HEADERSFASTA = keys %NCBIseqs;
+
+foreach my $nero (@BLACK){
+	# which one should be removed
+	my @TOeliminate = grep(/>${nero}/, @HEADERSFASTA);
+	# remove
+	foreach my $Remover (@TOeliminate){
+		delete($NCBIseqs{"$Remover"});
+	}
+}
+
+
+## filter length ----------------------------------------
 
 # filter NCBI hits by length
 
