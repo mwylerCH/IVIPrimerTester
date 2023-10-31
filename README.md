@@ -57,5 +57,5 @@ done
 The next generation of IVIPrimerTester will 
 - screen also for influenza strains from GISAID
 - produce alignments for visual inspetions of mismatches
-- develop a scoring method to assess the annealing efficiency
+- implement a scoring method to assess the annealing efficiency
 - assesment of PCR probes
