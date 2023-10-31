@@ -8,7 +8,7 @@ use Cwd;
 use POSIX;
 
 # script takes a reference sequence and checks names and size of NCBI mined
-# Wyler M. 31.10.2023
+# Wyler M. 13.10.2023
 
 #my $TEMPfolder = "/home/mwyler/tempDevPrimer";
 #my $NCBIFASTA = "/home/mwyler/tempDevPrimer/fastaFromNCBI.fa";
