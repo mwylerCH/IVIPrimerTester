@@ -4,6 +4,7 @@
 
 Testing is available for 41 primer sets/combinations (complete list visible [here](RefFiles/primerIVI.txt)).
 Briefly, IVIPrimerTester will mine available sequences from NCBI. These hits are subsequently evaluatd against a local reference sequence (length difference +/- 20% of the reference). To screen also for incomplete sequences, the NCBI hits are imputed using the reference, SNPs are however maintaned. Primers are then tested on the whole available sequence, allowing for multiple possible amplicons (specially indicated in the output generated).
+Goal was the development of a modular tool capable to be adapted to new viruses and new primer pairs.
 
 ## Output
 
@@ -38,7 +39,7 @@ Basic function
 ```
 perl IVIPrimerTester/MASTER.pl $PRIMER
 ```
-
+IVIPrimerTester allows to exclude specific sequences available on NCBI. This feature can be used to exclude special strains from remote regions, untrustworthy source or of low interest. The corresponding IDs need to be listed in the IVIPrimerTester [Blacklist](RefFiles/BlackList.txt).
 
 Loop through each primers
 ```
@@ -50,3 +51,11 @@ ls IVIPrimerTester/miners/* | while read line; do
   perl IVIPrimerTester/MASTER.pl $PRIMER > primerTestOUT/resultScreening_$PRIMER.txt
 done
 ```
+
+## Future development
+
+The next generation of IVIPrimerTester will 
+- screen also for influenza strains from GISAID
+- produce alignments for visual inspetions of mismatches
+- develop a scoring method to assess the annealing efficiency
+- assesment of PCR probes
