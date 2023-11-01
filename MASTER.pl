@@ -12,12 +12,7 @@ use POSIX;
 # script controls subprocess for primer searching in NCBI.
 # Wyler M. 13.10.2023
 
-# my $TEMPfolder = $ARGV[0];
 my $VIRUS = $ARGV[0];
-# my $VIRUS = "AHSV_TaqMan_NS2";
-# my $TEMPfolder = "/home/mwyler/tempDevPrimer";
-
-# $VIRUS = 'ciaone';
 
 my $MACHOPATH = dirname $0;
 my $dir = getcwd . "/";
@@ -80,7 +75,7 @@ system "perl $MACHOPATH/subFastaFilter.pl $TEMPfolder $MACHOPATH/RefFasta/${VIRU
 
 # print header
 my $NUMERO = `ls $TEMPfolder/singleRawFasta/*.fa | wc -l`;
-$NUMERO =~ s/\n//;;
+$NUMERO =~ s/\n//;
 print "Check primer: $VIRUS ($NUMERO seqs from NCBI)\n";
 
 
@@ -103,4 +98,4 @@ system "primersearch -infile $TEMPfolder/primerToTest.txt -seqall $TEMPfolder/al
 system "perl $MACHOPATH/subPrimerSearch.pl $TEMPfolder/primerSearch.out";
 
 
-system "cp -r $TEMPfolder/ COPIONE";
+#system "cp -r $TEMPfolder/ COPIONE";
