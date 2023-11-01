@@ -11,7 +11,7 @@ use POSIX;
 
 
 # Script to parse output from EMBOSS primersearch
-# Wyler M. 16.10.2023
+# Wyler M. 31.10.2023
 
 
 my $PRMSEARCH = $ARGV[0];
