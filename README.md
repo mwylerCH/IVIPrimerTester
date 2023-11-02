@@ -48,7 +48,7 @@ mkdir -p primerTestOUT
 ls IVIPrimerTester/miners/* | while read line; do
   PRIMER=`basename $line .R`
   echo $PRIMER
-  perl IVIPrimerTester/MASTER.pl $PRIMER > primerTestOUT/resultScreening_$PRIMER.txt
+  perl IVIPrimerTester/MASTER.pl $PRIMER > primerTestOUT/Results_$PRIMER.txt
 done
 ```
 
@@ -56,7 +56,6 @@ done
 
 The next generation of IVIPrimerTester will 
 - screen also for influenza strains from GISAID
-- produce alignments for visual inspections of mismatches
 - implement a scoring method to assess the annealing efficiency
 - assessment of PCR probes
 - implement IUPAC code 
