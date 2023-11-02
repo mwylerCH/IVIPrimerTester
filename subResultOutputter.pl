@@ -46,5 +46,5 @@ system "cat $TEMPfolder/mergedCandidates/*.fa > Results_$PRIMERpieces[0].fa";
 
 # add primers
 open(FH, ">>", "Results_$PRIMERpieces[0].fa") or die "File couldn't be opened"; 
-print FH "$HEADforward\n$SEQforward\n$HEADreverse\n$SEQreverse\n";
+print FH ">$HEADforward\n$SEQforward\n>$HEADreverse\n$SEQreverse\n";
 close(FH);
