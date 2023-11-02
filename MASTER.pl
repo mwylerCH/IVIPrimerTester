@@ -97,5 +97,10 @@ system "primersearch -infile $TEMPfolder/primerToTest.txt -seqall $TEMPfolder/al
 # parse output
 system "perl $MACHOPATH/subPrimerSearch.pl $TEMPfolder/primerSearch.out";
 
+## Output Fasta ---------------------------------
+
+# concatenate complemented fasta and add primers
+system "perl $MACHOPATH/subResultOutputter.pl $TEMPfolder";
+
 
 #system "cp -r $TEMPfolder/ COPIONE";
