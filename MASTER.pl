@@ -12,7 +12,12 @@ use POSIX;
 # script controls subprocess for primer searching in NCBI.
 # Wyler M. 13.10.2023
 
+# my $TEMPfolder = $ARGV[0];
 my $VIRUS = $ARGV[0];
+# my $VIRUS = "AHSV_TaqMan_NS2";
+# my $TEMPfolder = "/home/mwyler/tempDevPrimer";
+
+# $VIRUS = 'ciaone';
 
 my $MACHOPATH = dirname $0;
 my $dir = getcwd . "/";
@@ -95,12 +100,19 @@ system "primersearch -infile $TEMPfolder/primerToTest.txt -seqall $TEMPfolder/al
 
 
 # parse output
-system "perl $MACHOPATH/subPrimerSearch.pl $TEMPfolder/primerSearch.out";
+my $OUT = `perl $MACHOPATH/subPrimerSearch.pl $TEMPfolder/primerSearch.out`;
+
+print "$OUT";
 
 ## Output Fasta ---------------------------------
 
-# concatenate complemented fasta and add primers
-system "perl $MACHOPATH/subResultOutputter.pl $TEMPfolder";
+# Run only with problematic primers (count lines of stdout)
+my $NEWLINEcount = ($OUT =~ tr/\n//);
+
+if ($NEWLINEcount > 0){
+	# concatenate complemented fasta and add primers
+	system "perl $MACHOPATH/subResultOutputter.pl $TEMPfolder";
+}
 
 
-#system "cp -r $TEMPfolder/ COPIONE";
+# system "cp -r $TEMPfolder/ COPIONE";
