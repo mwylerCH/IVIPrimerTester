@@ -59,3 +59,4 @@ The next generation of IVIPrimerTester will
 - produce alignments for visual inspections of mismatches
 - implement a scoring method to assess the annealing efficiency
 - assessment of PCR probes
+- implement IUPAC code 
