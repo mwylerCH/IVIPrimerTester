@@ -25,10 +25,11 @@ As visible for KY495781.1, multiple amplicons are possible. In this case, IVIPri
 ### installation
 
 IVIPrimerTester requires the availability of the programm languages perl and R ([rentrez](https://cran.r-project.org/web/packages/rentrez/index.html)).
-Furthermore IVIPrimerTester dependes from the [EMBOSS](https://emboss.sourceforge.net/) suit.
+Furthermore IVIPrimerTester dependes from the [EMBOSS](https://emboss.sourceforge.net/) suit and the `Text::Fuzzy` [package](https://metacpan.org/pod/Text::Fuzzy) of perl.
 
 ```
 sudo apt-get install emboss
+sudo cpanm Text::Fuzzy
 
 git clone https://github.com/mwylerCH/IVIPrimerTester.git
 ```
