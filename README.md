@@ -16,8 +16,10 @@ EF641008.1      Forward=1       Reverse=3       AmplemerLen=113  Porcine respira
 KY495781.1      Forward=3       Reverse=0       AmplemerLen=115  Porcine reproductive and respiratory syndrome virus strain SH/CH/2016, complete genome
 KY495781.1      Forward=3       Reverse=0       AmplemerLen=2417         Porcine reproductive and respiratory syndrome virus strain SH/CH/2016, complete genome
 'KY495781.1' has multiple amplifications.
+EF641008.1 => Problematic Probe annealing.
 ```
 As visible for KY495781.1, multiple amplicons are possible. In this case, IVIPrimerTester mentions them at the bottom of the output.
+Similarly, also Probes with more then two mismatches are indicated at the bottom of the output.
 
 
 ## Usage
@@ -58,5 +60,4 @@ done
 The next generation of IVIPrimerTester will 
 - screen also for influenza strains from GISAID
 - implement a scoring method to assess the annealing efficiency
-- assessment of PCR probes
 - implement IUPAC code 
