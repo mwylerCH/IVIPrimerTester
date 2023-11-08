@@ -6,6 +6,8 @@ Testing is available for 41 primer sets/combinations (complete list visible [her
 Briefly, IVIPrimerTester will mine available sequences from NCBI. These hits are subsequently evaluatd against a local reference sequence (length difference +/- 20% of the reference). To screen also for incomplete sequences, the NCBI hits are imputed using the reference, SNPs and indels are however maintaned. Primers are then tested on the whole available sequence, allowing for multiple possible amplicons (specifically indicated in the output generated).
 Goal was the development of a modular tool capable to be adapted to new viruses and new primer pairs.
 
+*A tollerance of two mismatches is tollerated (for primers and probes.)*
+
 ## Output
 
 IVIPrimerTester produces a stdout containing mismatches (bp) for each primer, the length of the amplification and the sequence description. A header of the file indicates the tested primer and the number of screened samples.
