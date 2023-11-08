@@ -21,7 +21,7 @@ EF641008.1 => Problematic Probe annealing.
 As visible for KY495781.1, multiple amplicons are possible. In this case, IVIPrimerTester mentions them at the bottom of the output.
 Similarly, also Probes with more then two mismatches are indicated at the bottom of the output.
 
-Furthermore, problematic primers/probes are written out for subsequent visual inspections. Please consult the [wiki](https://github.com/mwylerCH/IVIPrimerTester/wiki) page for details.
+Furthermore, problematic primers/probes are written out for subsequent visual inspections (file ending with ".fa"). Please consult the [wiki](https://github.com/mwylerCH/IVIPrimerTester/wiki) page for details.
 
 ## Usage
 
