@@ -111,6 +111,19 @@ system "ls $TEMPfolder/singleRawFasta/*.fa | parallel 'megamerger -wordsize 20 -
 system "cat $MERGEDfolder/*.fa > $TEMPfolder/allFastas.fa";
 system "primersearch -infile $TEMPfolder/primerToTest.txt -seqall $TEMPfolder/allFastas.fa -mismatchpercent 20 -outfile $TEMPfolder/primerSearch.out >/dev/null 2>&1";
 
+# write out to temp File with which sequences are not even amplified
+system "perl $MACHOPATH/subAmpliTester.pl $TEMPfolder";
+
+## test which primer is not amplified of the previous list
+# make first fasta for each primer...
+system "perl $MACHOPATH/subMakePrimerFasta.pl $TEMPfolder";
+# then test them with water (and parse results to file for later)
+system "cat $TEMPfolder/noAmplifications.txt | parallel \"perl $MACHOPATH/subSideChecker.pl $TEMPfolder $TEMPfolder/mergedCandidates/{}.fa\" > $TEMPfolder/MismatchedPrimers.txt 2>&1";
+
+# print out problematic and location
+system "Rscript $MACHOPATH/subGeograph.R $TEMPfolder";
+
+
 # make Probe testing
 system "perl $MACHOPATH/subProbeTester.pl $TEMPfolder >/dev/null 2>&1";
 
@@ -120,8 +133,10 @@ my $OUT = `perl $MACHOPATH/subPrimerSearch.pl $TEMPfolder/primerSearch.out`;
 
 print "$OUT";
 
+system "rm -r backup_$VIRUS";
+system "cp -r $TEMPfolder backup_$VIRUS";
 
-# system "cp -r $TEMPfolder backup_$VIRUS";
+exit;
 
 ## Output Fasta ---------------------------------
 

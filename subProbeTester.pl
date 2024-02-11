@@ -151,7 +151,6 @@ foreach my $sequence (@CropForOut){
 	}
 }
 
-exit;
 ## Print Out a temp Seq Blacklist  ----------------------------------
 
 my $BLACKname = $TEMPfolder . "/tempBLACKsequence.txt";

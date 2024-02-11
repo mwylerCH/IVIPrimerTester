@@ -63,7 +63,9 @@ while ( my ($k,$v) = each %seqs ) {
 close(FH);
 
 # 20% tollerance
-my $MINLEN = $REFLEN*0.8;
+#my $MINLEN = $REFLEN*0.8;
+#my $MAXLEN = $REFLEN*1.2;
+my $MINLEN = 1;
 my $MAXLEN = $REFLEN*1.2;
 
 ## Read in from NCBI ----------------------------------------
