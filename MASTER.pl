@@ -133,11 +133,6 @@ my $OUT = `perl $MACHOPATH/subPrimerSearch.pl $TEMPfolder/primerSearch.out`;
 
 print "$OUT";
 
-system "rm -r backup_$VIRUS";
-system "cp -r $TEMPfolder backup_$VIRUS";
-
-exit;
-
 ## Output Fasta ---------------------------------
 
 # Run only with problematic primers (count lines of stdout)
