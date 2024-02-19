@@ -62,6 +62,7 @@ done
 ## Future development
 
 The next generation of IVIPrimerTester will 
+- Intersect multiple primers results (eg primer combinations)
 - screen also for influenza strains from GISAID
 - implement a scoring method to assess the annealing efficiency
 - implement IUPAC code 
