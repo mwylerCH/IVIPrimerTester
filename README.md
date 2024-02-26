@@ -59,10 +59,16 @@ ls IVIPrimerTester/miners/* | while read line; do
 done
 ```
 
+Geographical information
+
+A secondary script allows to investigate the origin of problematic  
+```
+Rscript IVIPrimerTester/GeoFinder.R primerTestOUT/Results_$PRIMER.txt primerTestOUT/Results_${PRIMER}_geo.txt
+```
+
 ## Future development
 
 The next generation of IVIPrimerTester will 
-- Intersect multiple primers results (eg primer combinations)
 - screen also for influenza strains from GISAID
 - implement a scoring method to assess the annealing efficiency
 - implement IUPAC code 
