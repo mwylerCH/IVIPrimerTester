@@ -13,6 +13,7 @@ Goal was the development of a modular tool capable to be adapted to new viruses 
 IVIPrimerTester produces a stdout containing mismatches (bp) for each primer, the length of the amplification and the sequence description. A header of the file indicates the tested primer and the number of screened samples.
 ```
 Check primer: PRRSV_US_TaqMan_ORF7 (1833 seqs from NCBI)
+No amplification for: EU076704.1       (origin: Hong Kong)       Check Primer: FORWARD,REVERSE,PROBE
 AY262352.1      Forward=3       Reverse=0       AmplemerLen=10962        PRRSV HB-2(sh)/2002, complete genome
 EF641008.1      Forward=1       Reverse=3       AmplemerLen=113  Porcine respiratory and reproductive syndrome virus strain JXwn06, complete genome
 KY495781.1      Forward=3       Reverse=0       AmplemerLen=115  Porcine reproductive and respiratory syndrome virus strain SH/CH/2016, complete genome
@@ -39,7 +40,7 @@ sudo cpanm Text::Fuzzy
 git clone https://github.com/mwylerCH/IVIPrimerTester.git
 ```
 
-### Run
+### Basic Run
 
 Basic function
 ```
@@ -59,11 +60,18 @@ ls IVIPrimerTester/miners/* | while read line; do
 done
 ```
 
-Geographical information
+### Geographical information
 
-A secondary script allows to investigate the origin of problematic  
+By default, the basic function will output any geographical information available for unamplified sequences. If these informations are required also for other problematic entries, it's possible to retrieve these with a secondary script.
 ```
 Rscript IVIPrimerTester/GeoFinder.R primerTestOUT/Results_$PRIMER.txt primerTestOUT/Results_${PRIMER}_geo.txt
+```
+
+### Intersect marker combinations
+
+IVIPrimerTester is accepting a single primer/probe set. However, specific tests are run with a combination of primers. The script *PrimerCompare.pl* provides an intersect of problematic sequences from two primer sets. Required files are two outputs from testing. 
+```
+perl PrimerCompare.pl WNV_TaqMan_5NTR_comb1.txt WNV_TaqMan_5NTR_comb2.txt
 ```
 
 ## Future development
