@@ -35,8 +35,6 @@ Furthermore IVIPrimerTester dependes from the [EMBOSS](https://emboss.sourceforg
 
 ```
 sudo apt-get install emboss
-sudo cpanm Text::Fuzzy
-
 git clone https://github.com/mwylerCH/IVIPrimerTester.git
 ```
 
